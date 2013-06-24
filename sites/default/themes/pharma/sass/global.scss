@@ -1,0 +1,270 @@
+@import "base";
+
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+
+/* HTML elements */
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: Arial;
+}
+
+body {
+ background: url(../img/bg_pattern.png) repeat;
+  font: normal 14px/20px Arial, Helvetica, sans-serif; 
+  color: #56595e;  
+}
+
+a:link, a:visited, a:hover {
+  text-decoration: none;
+  color: $mainColor;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+a:hover {
+  color: #000000;
+}
+
+h1,
+h2 {
+  font-family: "BebasNeueRegular";
+  font-weight: 100;
+  line-height: 1;
+}
+
+h1.site-name,
+h2.site-name {
+  font-size: 3em;
+  font-weight: 100;
+  text-transform: uppercase;
+  a {
+	  color: $mainColor;  
+  }
+}
+
+h1.site-name a:hover,
+h2.site-name a:hover {
+  color: #222222;
+}
+
+.webform-client-form input.form-submit {
+  border: none;
+  background: $mainColor;
+  color: $inverseColor;
+  border-bottom: 3px solid $mainColorDark;
+  font-size: 1.154em;
+  text-transform: uppercase;
+  padding: 0.35em 0.5em;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    background: $mainColorDark;
+  }
+}
+
+.webform-client-form input.form-text, .webform-client-form input.form-textarea {
+  border: 1px solid $mainColorDark;
+  line-height: 25px;
+  width: 100%;
+}
+
+input.form-text {
+  height: 25px;
+}
+
+/** Blocks **/
+h2.block-title {
+  font-size: 2em;
+  margin-bottom: .5em;
+}
+
+.region-sidebar-second .block {
+  margin-right: -28px;
+  background: url(../img/bg_block_sidebar_right.png) no-repeat right top;
+  color: $inverseColor;
+  .block-inner {
+    background: $mainColor;
+    margin-right: 28px;
+    padding: 1em;
+  }
+  h2.block-title {
+    color: $inverseColor;
+    text-shadow: 1px 1px 2px $inverseColorShadow;
+  }
+}
+
+#zone-branding #region-branding {
+  margin: 20px 0;
+  width: 960px;
+}
+
+/* Main Menu */
+#zone-menu-wrapper {
+  background-color: $mainColor;
+  margin-bottom: 20px;
+}
+
+#zone-menu ul.menu {
+  margin: 0;
+  padding: 0;
+  li {
+	  margin: 0;
+	  padding: 0;
+	  float: left;
+	  margin-right: 40px;
+	  line-height: 55px;
+	  list-style: none;
+	  font-family: "BebasNeueRegular";
+	  font-size: 2em;
+	  text-shadow: 1px 1px 2px $inverseColorShadow;
+	  a {
+		  color: $inverseColor;
+		}
+	}
+
+}
+
+#zone-menu ul.menu li a:hover, #zone-menu ul.menu li a.active {
+  color: $inverseColorActive;
+  text-shadow: none;
+}
+
+#block-system-main {
+  font-size: 1.231em;
+  line-height: 1.4;
+}
+
+/** Frontpage Promo block **/
+#zone-preface #region-preface {
+  width: 940px;
+}
+
+.block-promo-homepage-block {
+  margin-bottom: 20px;
+  height: 320px;
+  overflow: hidden;
+}
+
+ul.promo-items {
+  margin: 0;
+  padding: 0;
+}
+
+ul.promo-items li.promo-item {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 320px;
+  width: 940px;
+  .promo-description {
+	  position: absolute;
+	  top: 20px;
+	  right: 0;
+	  padding: 1.8em;
+	  background: url(../img/bg_promo_description.png) repeat;
+	  width: 33%;
+	  text-align: right;
+	  z-index: 100;
+	  h1 {
+		  text-shadow: 1px 1px 2px $defaultColorShadow;
+		}
+	}
+	.promo-visual {
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  z-index: 10;
+	}
+
+}
+
+/** Search Block **/
+#block-search-form {
+  position: absolute;
+  top: 40px;
+  right: -26px;
+  input.form-text {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #888;
+    padding-bottom: 4px;
+    padding-right: 30px;
+  }
+  input.form-submit {
+	  background: url(../img/bg_search_btn.png) no-repeat center center;
+	  text-indent: -999em;
+	  border: none;
+	  width: 25px;
+	  height: 20px;
+	  cursor: pointer;
+	  position: relative;
+	  right: 30px;
+	}
+}
+
+/** Footer **/
+#zone-footer {
+  font-size: 0.846em;
+  #region-footer-first {
+    padding: 40px 0 20px;
+    text-align: center;
+  }
+}
+
+/** Teamleden **/
+ul.team-items {
+  margin: 0;
+  padding: 0;
+  li.team-item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    margin-right: 10%;
+    margin-bottom: 30px;
+    width: 45%;
+    .team-pasfoto {
+      clear: left;
+      float: left;
+      width: 140px;
+      img {
+        border: 2px solid #cacaca;
+      }
+    }
+    .team-description {
+      margin-left: 140px;
+      .team-naam {
+        font-weight: 800;
+      }
+    }
+  }
+  li.team-item.last {
+    margin-right: 0;
+  }
+}
+
+/** Contact page **/
+.context-contact .gmap {
+  margin-left: 20px;
+  border: 3px solid #ededed;
+}
+
+/** Nieuws nodes **/
+.node-type-nieuws .submitted {
+  margin-bottom: 20px;
+}
+
+.node-type-nieuws .field-name-field-nieuws-afbeelding {
+  float: left;
+  padding-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}

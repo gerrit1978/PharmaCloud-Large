@@ -1,0 +1,310 @@
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+/* HTML elements */
+/* line 8, ../sass/global.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Arial;
+}
+
+/* line 12, ../sass/global.scss */
+body {
+  background: url(../img/bg_pattern.png) repeat;
+  font: normal 14px/20px Arial, Helvetica, sans-serif;
+  color: #56595e;
+}
+
+/* line 18, ../sass/global.scss */
+a:link, a:visited, a:hover {
+  text-decoration: none;
+  color: #009900;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+/* line 28, ../sass/global.scss */
+a:hover {
+  color: #000000;
+}
+
+/* line 33, ../sass/global.scss */
+h1,
+h2 {
+  font-family: "BebasNeueRegular";
+  font-weight: 100;
+  line-height: 1;
+}
+
+/* line 40, ../sass/global.scss */
+h1.site-name,
+h2.site-name {
+  font-size: 3em;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+/* line 44, ../sass/global.scss */
+h1.site-name a,
+h2.site-name a {
+  color: #009900;
+}
+
+/* line 50, ../sass/global.scss */
+h1.site-name a:hover,
+h2.site-name a:hover {
+  color: #222222;
+}
+
+/* line 54, ../sass/global.scss */
+.webform-client-form input.form-submit {
+  border: none;
+  background: #009900;
+  color: white;
+  border-bottom: 3px solid #0a570a;
+  font-size: 1.154em;
+  text-transform: uppercase;
+  padding: 0.35em 0.5em;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+/* line 68, ../sass/global.scss */
+.webform-client-form input.form-submit:hover {
+  background: #0a570a;
+}
+
+/* line 73, ../sass/global.scss */
+.webform-client-form input.form-text, .webform-client-form input.form-textarea {
+  border: 1px solid #0a570a;
+  line-height: 25px;
+  width: 100%;
+}
+
+/* line 79, ../sass/global.scss */
+input.form-text {
+  height: 25px;
+}
+
+/** Blocks **/
+/* line 84, ../sass/global.scss */
+h2.block-title {
+  font-size: 2em;
+  margin-bottom: .5em;
+}
+
+/* line 89, ../sass/global.scss */
+.region-sidebar-second .block {
+  margin-right: -28px;
+  background: url(../img/bg_block_sidebar_right.png) no-repeat right top;
+  color: white;
+}
+/* line 93, ../sass/global.scss */
+.region-sidebar-second .block .block-inner {
+  background: #009900;
+  margin-right: 28px;
+  padding: 1em;
+}
+/* line 98, ../sass/global.scss */
+.region-sidebar-second .block h2.block-title {
+  color: white;
+  text-shadow: 1px 1px 2px #222222;
+}
+
+/* line 104, ../sass/global.scss */
+#zone-branding #region-branding {
+  margin: 20px 0;
+  width: 960px;
+}
+
+/* Main Menu */
+/* line 110, ../sass/global.scss */
+#zone-menu-wrapper {
+  background-color: #009900;
+  margin-bottom: 20px;
+}
+
+/* line 115, ../sass/global.scss */
+#zone-menu ul.menu {
+  margin: 0;
+  padding: 0;
+}
+/* line 118, ../sass/global.scss */
+#zone-menu ul.menu li {
+  margin: 0;
+  padding: 0;
+  float: left;
+  margin-right: 40px;
+  line-height: 55px;
+  list-style: none;
+  font-family: "BebasNeueRegular";
+  font-size: 2em;
+  text-shadow: 1px 1px 2px #222222;
+}
+/* line 128, ../sass/global.scss */
+#zone-menu ul.menu li a {
+  color: white;
+}
+
+/* line 135, ../sass/global.scss */
+#zone-menu ul.menu li a:hover, #zone-menu ul.menu li a.active {
+  color: black;
+  text-shadow: none;
+}
+
+/* line 140, ../sass/global.scss */
+#block-system-main {
+  font-size: 1.231em;
+  line-height: 1.4;
+}
+
+/** Frontpage Promo block **/
+/* line 146, ../sass/global.scss */
+#zone-preface #region-preface {
+  width: 940px;
+}
+
+/* line 150, ../sass/global.scss */
+.block-promo-homepage-block {
+  margin-bottom: 20px;
+  height: 320px;
+  overflow: hidden;
+}
+
+/* line 156, ../sass/global.scss */
+ul.promo-items {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 161, ../sass/global.scss */
+ul.promo-items li.promo-item {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 320px;
+  width: 940px;
+}
+/* line 167, ../sass/global.scss */
+ul.promo-items li.promo-item .promo-description {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  padding: 1.8em;
+  background: url(../img/bg_promo_description.png) repeat;
+  width: 33%;
+  text-align: right;
+  z-index: 100;
+}
+/* line 176, ../sass/global.scss */
+ul.promo-items li.promo-item .promo-description h1 {
+  text-shadow: 1px 1px 2px white;
+}
+/* line 180, ../sass/global.scss */
+ul.promo-items li.promo-item .promo-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+/** Search Block **/
+/* line 190, ../sass/global.scss */
+#block-search-form {
+  position: absolute;
+  top: 40px;
+  right: -26px;
+}
+/* line 194, ../sass/global.scss */
+#block-search-form input.form-text {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #888;
+  padding-bottom: 4px;
+  padding-right: 30px;
+}
+/* line 201, ../sass/global.scss */
+#block-search-form input.form-submit {
+  background: url(../img/bg_search_btn.png) no-repeat center center;
+  text-indent: -999em;
+  border: none;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  right: 30px;
+}
+
+/** Footer **/
+/* line 214, ../sass/global.scss */
+#zone-footer {
+  font-size: 0.846em;
+}
+/* line 216, ../sass/global.scss */
+#zone-footer #region-footer-first {
+  padding: 40px 0 20px;
+  text-align: center;
+}
+
+/** Teamleden **/
+/* line 223, ../sass/global.scss */
+ul.team-items {
+  margin: 0;
+  padding: 0;
+}
+/* line 226, ../sass/global.scss */
+ul.team-items li.team-item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  float: left;
+  margin-right: 10%;
+  margin-bottom: 30px;
+  width: 45%;
+}
+/* line 234, ../sass/global.scss */
+ul.team-items li.team-item .team-pasfoto {
+  clear: left;
+  float: left;
+  width: 140px;
+}
+/* line 238, ../sass/global.scss */
+ul.team-items li.team-item .team-pasfoto img {
+  border: 2px solid #cacaca;
+}
+/* line 242, ../sass/global.scss */
+ul.team-items li.team-item .team-description {
+  margin-left: 140px;
+}
+/* line 244, ../sass/global.scss */
+ul.team-items li.team-item .team-description .team-naam {
+  font-weight: 800;
+}
+/* line 249, ../sass/global.scss */
+ul.team-items li.team-item.last {
+  margin-right: 0;
+}
+
+/** Contact page **/
+/* line 255, ../sass/global.scss */
+.context-contact .gmap {
+  margin-left: 20px;
+  border: 3px solid #ededed;
+}
+
+/** Nieuws nodes **/
+/* line 261, ../sass/global.scss */
+.node-type-nieuws .submitted {
+  margin-bottom: 20px;
+}
+
+/* line 265, ../sass/global.scss */
+.node-type-nieuws .field-name-field-nieuws-afbeelding {
+  float: left;
+  padding-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
