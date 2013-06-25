@@ -1,0 +1,463 @@
+<?php
+
+define('COMMERCE_BPOST_SHIPPING_MANAGER_ENDPOINT', 'https://shippingmanager.bpost.be/ShmFrontEnd/start');
+
+/**
+ * Implements hook_menu().
+ */
+function commerce_bpost_menu() {
+  $items = array();
+
+  $items['admin/commerce/config/shipping/methods/bpost/edit'] = array(
+    'title' => 'Edit',
+    'description' => 'Configure the bpost shipping method.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_bpost_settings_form'),
+    'access arguments' => array('administer shipping'),
+    'file' => 'commerce_bpost.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_INLINE,
+    'weight' => 0,
+  );
+
+  $items['checkout/%commerce_order/bpost-form'] = array(
+    'title' => 'bpost form',
+    'page callback' => 'commerce_bpost_ajax_redirect_form',
+    'page arguments' => array(1),
+    'access callback' => 'commerce_bpost_ajax_redirect_form_access',
+    'access arguments' => array(1),
+    'type' => MENU_CALLBACK,
+  );
+
+  // URL used by bpost to provide feedback.
+  $items['checkout/bpost-feedback'] = array(
+    'title' => 'bpost feedback',
+    'page callback' => 'commerce_bpost_bpost_feedback',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+
+  return $items;
+}
+
+/**
+ * Implements hook_commerce_checkout_pane_info().
+ */
+function commerce_bpost_commerce_checkout_pane_info() {
+  $checkout_panes = array();
+
+  $checkout_panes['commerce_bpost'] = array(
+    'name' => t('Commerce bpost'),
+    'title' => t('bpost shipping'),
+    'page' => 'shipping',
+    'file' => 'includes/commerce_bpost.checkout_pane.inc',
+    'callbacks' => array(
+      'checkout_form' => 'commerce_bpost_checkout_pane_checkout_form',
+      'settings_form' => 'commerce_bpost_checkout_pane_settings_form',
+      'checkout_form_validate' => 'commerce_bpost_checkout_pane_checkout_form_validate',
+    )
+  );
+
+  return $checkout_panes;
+}
+
+/**
+ * Implements hook_commerce_shipping_method_info().
+ */
+function commerce_bpost_commerce_shipping_method_info() {
+  $shipping_methods = array();
+
+  $shipping_methods['bpost'] = array(
+    'title' => t('bpost'),
+    'description' => t('Enables bpost shipping services through the !link', array('!link' => l('bpost shipping manager.', 'http://www.bpost.be/site/nl/business/send_post/parcels/shippingmanager.html'))),
+  );
+
+  return $shipping_methods;
+}
+
+/**
+ * Implements hook_commerce_shipping_service_info().
+ */
+function commerce_bpost_commerce_shipping_service_info() {
+  $shipping_services = array();
+
+  $shipping_services_shared = array(
+    'shipping_method' => 'bpost',
+    'callbacks' => array(
+      'rate' => 'commerce_bpost_commerce_shipping_rate',
+    ),
+  );
+
+  $shipping_services['bpack_express'] = array(
+    'title' => t('bpack World Express'),
+    'description' => t('bpack World Express'),
+  ) + $shipping_services_shared;
+
+  $shipping_services['bpack_business'] = array(
+    'title' => t('bpack World'),
+    'description' => t('bpack World'),
+  ) + $shipping_services_shared;
+
+  $shipping_services['parcels_depot'] = array(
+    'title' => t('bpack 24/7'),
+    'description' => t('bpost bpack 24/7'),
+  ) + $shipping_services_shared;
+
+  $shipping_services['pugo'] = array(
+    'title' => t('bpack@bpost'),
+    'description' => t('bpack@bpost'),
+  ) + $shipping_services_shared;
+
+  $shipping_services['regular'] = array(
+    'title' => t('bpack@home'),
+    'description' => t('bpack@home'),
+  ) + $shipping_services_shared;
+
+  return $shipping_services;
+}
+
+/**
+ * Rate callback for commerce shipping.
+ */
+function commerce_bpost_commerce_shipping_rate($shipping_service, $order) {
+  if (isset($order->data['bpost']['deliveryMethod'])) {
+    $delivery_method = $order->data['bpost']['deliveryMethod'];
+    $delivery_method = str_replace(' ', '_', strtolower($delivery_method));
+    if (isset($order->data['bpost']['deliveryMethodPriceTotal']) && $shipping_service['name'] == $delivery_method) {
+      return array(
+        'amount' => $order->data['bpost']['deliveryMethodPriceTotal'],
+        'currency_code' => 'EUR',
+        'data' => array(),
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function commerce_bpost_theme() {
+  return array(
+    'commerce_bpost_button' => array(
+       'arguments' => array('order' => NULL),
+    )
+  );
+}
+
+/**
+ * Calculates the checksum to use when posting order details to bpost.
+ *
+ * @param $parameters
+ *   An associative array containing the parameter keys and values over which
+ *   the hash-value needs to be calculated. This function will ensure that only
+ *   those parameters that require hashing (refer to section "5.1.1 HTTP POST
+ *   parameters" of the "Shipping Manager Integration Manual") are taken into
+ *   account, and ignores others.
+ *
+ * @return
+ *   The calculated SHA-256 hash.
+ */
+function commerce_bpost_checksum_calculate($parameters) {
+  $checksum_secret = variable_get('commerce_bpost_secret', '');
+
+  // Define the parameters that are taken into account when creating the secure
+  // hash value.
+  $secure_parameters = array(
+    'accountId', 'action', 'customerCountry', 'orderReference', 'orderWeight',
+    'extraSecure', 'costCenter', 'deliveryMethodOverrides',
+  );
+
+  // Calculating or verifying the checksum requires the input to be ordered
+  // alphabetically.
+  ksort($parameters);
+
+  // Build the input string for checksum calculation. Refer to section "3.2.4
+  // Checksum" of the "Shipping Manager Integration Manual" for more
+  // information.
+  $checksum_input = '';
+  foreach ($parameters as $key => $value) {
+    if (in_array($key, $secure_parameters) && $value !== '') {
+      $checksum_input .= "$key=$value&";
+    }
+  }
+  $checksum_input .= $checksum_secret;
+
+  return hash('sha256', $checksum_input);
+}
+
+/**
+ * Verifies the hash value returned by bpost.
+ *
+ * @param $parameters
+ *   An associate array containing the keys and values (including the checksum)
+ *   return by bpost.
+ *
+ * @return
+ *   TRUE if the hash value in $parameters matches the hash value calculated
+ *   over the secure parameters in $parameters.
+ */
+function commerce_bpost_checksum_verify($parameters) {
+  $hash = commerce_bpost_checksum_calculate($parameters);
+  return (isset($parameters['checksum']) && $parameters['checksum'] == $hash);
+}
+
+/**
+ * Form builder; builds the redirect-to-bpost form.
+ *
+ * @param $order
+ *   The commerce order object for which to generate the bpost redirect form.
+ */
+function commerce_bpost_redirect_form($form, $form_state, $order) {
+  global $language;
+
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  $bpost_account = variable_get('commerce_bpost_account');
+  $parameters = array(
+    'accountId' => $bpost_account,
+    'action' => 'START',
+    'orderReference' => $order->order_number,
+    'orderTotalPrice' => $order_wrapper->commerce_order_total->amount->value(),
+    'lang' => strtoupper($language->language),
+  );
+
+  $parameters['confirmUrl'] = url('checkout/bpost-feedback', array('absolute' => TRUE));
+
+  // If the order contains a shipping profile, map the values to bpost
+  // parameters and include them in the information sent to bpost.
+  if (isset($order_wrapper->commerce_customer_shipping->commerce_customer_address)) {
+    $shipping_address = $order_wrapper->commerce_customer_shipping->commerce_customer_address->value();
+
+    $mapping = array(
+      'country' => 'customerCountry',
+      'locality' => 'customerCity',
+      'postal_code' => 'customerPostalCode',
+      'thoroughfare' => 'customerStreet',
+    );
+
+    foreach ($mapping as $commerce_key => $bpost_key) {
+      if (!empty($shipping_address[$commerce_key])) {
+        $parameters[$bpost_key] = $shipping_address[$commerce_key];
+      }
+    }
+  }
+
+  // The customerCountry-parameter is required by bpost. If we could not
+  // determine it from the shipping address, set it to 'BE'.
+  if (empty($parameters['customerCountry'])) {
+    $parameters['customerCountry'] = 'BE';
+  }
+
+  // If Commerce Physical Product is enabled, see if we have a weight for the
+  // order, and if we do, hand that information over to bpost.
+  // @see http://drupal.org/project/commerce_physical.
+  if (module_exists('commerce_physical')) {
+    if ($order_weight = commerce_physical_order_weight($order, 'g')) {
+      $parameters['orderWeight'] = $order_weight['weight'];
+    }
+  }
+
+  // Give other modules the chance to alter the parameters prior to calculating
+  // the checksum and sending the data to bpost.
+  drupal_alter('commerce_bpost_parameters_alter', $parameters);
+
+  // Add the checksum.
+  $parameters['checksum'] = commerce_bpost_checksum_calculate($parameters);
+
+  foreach($parameters as $key => $value) {
+    $form[$key] = array(
+      '#type' => 'hidden',
+      '#value' => $value,
+    );
+  }
+
+  // Add the line items to the information sent to bpost.
+  foreach ($order_wrapper->commerce_line_items as $delta => $line_item_wrapper) {
+    if ($line_item_wrapper->type->value() == 'product') {
+      $form['line' . $delta] = array(
+        '#type' => 'hidden',
+        '#value' => $line_item_wrapper->line_item_label->value() . '|' .  round($line_item_wrapper->quantity->value(), 0),
+        '#name' => 'orderLine',
+      );
+    }
+  }
+
+  // Add the submit button.
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'bpost',
+  );
+
+  $form['#action'] = COMMERCE_BPOST_SHIPPING_MANAGER_ENDPOINT;
+  $form['#attributes']['target'] = '_blank';
+
+  return $form;
+}
+
+/**
+ * Page callback to render the hidden bpost redirect form.
+ */
+function commerce_bpost_ajax_redirect_form($order) {
+  print drupal_render(drupal_get_form('commerce_bpost_redirect_form', $order));
+  exit(0);
+}
+
+/**
+ * Sends a confirmation message to bpost for the given order.
+ *
+ * Once an order is confirmed, the order status in the shipping manager will be
+ * updated from "Pending" to "Open".
+ *
+ * @param $order
+ *   The order for which to send a confirmation message to bpost.
+ */
+function commerce_bpost_confirm_order($order) {
+  // Make sure this function is only invoked for orders that use the bpost
+  // shipping method.
+  if (commerce_bpost_shipping_line_item($order)) {
+    $bpost_account = variable_get('commerce_bpost_account');
+
+    // Build an array with parameters/data to post to bpost.
+    $param = array(
+      'accountId' => $bpost_account,
+      'action' => 'CONFIRM',
+      'orderReference' => $order->order_id,
+      'customerCountry' => $order->data['bpost']['customerCountry'],
+    );
+
+    // Calculate and add the checksum to the parameters.
+    $param['checksum'] = commerce_bpost_checksum_calculate($param);
+
+    // Set the URL to which we need to post the order confirmation data.
+    $url = COMMERCE_BPOST_SHIPPING_MANAGER_ENDPOINT;
+
+    // Do not follow 302 redirects.
+    $options['max_redirects'] = 0;
+
+    // Set the correct method and content type for an HTTP POST.
+    $options['method'] = 'POST';
+    $options['headers'] = array('Content-Type' => 'application/x-www-form-urlencoded');
+
+    // Add the data to be send to bpost.
+    $options['data'] = drupal_http_build_query($param);
+
+    // Send the POST request to bpost.
+    $result = drupal_http_request($url, $options);
+  }
+}
+
+/**
+ * Returns the bpost shipping line item for an order if it exists.
+ *
+ * @param $order
+ *   The order for which to return the bpost shipping service line item.
+ *
+ * @return
+ *   Will return the first bpost shipping service line item in the order if
+ *   found, or FALSE if not such line item is present in the order.
+ */
+function commerce_bpost_shipping_line_item($order) {
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+
+  // Get a list of bpost shipping service keys.
+  $bpost_shipping_services = array_keys(commerce_bpost_commerce_shipping_service_info());
+  $contains_bpost_shipping = FALSE;
+
+  // Loop through the order's line items.
+  foreach ($order_wrapper->commerce_line_items as $line_item_wrapper) {
+    if ($line_item_wrapper->type->value() == 'shipping' && $line_item_wrapper->commerce_shipping_service->value()) {
+      $order_shipping_service = $line_item_wrapper->commerce_shipping_service->value();
+      if (in_array($order_shipping_service, $bpost_shipping_services)) {
+        return $line_item_wrapper->value();
+      }
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Theme function to render the bpost button.
+ */
+function theme_commerce_bpost_button($variables) {
+  $order = $variables['order'];
+
+  drupal_add_js(drupal_get_path('module', 'commerce_bpost') . '/includes/js/commerce_bpost.js');
+  drupal_add_js(array('commerceBpost' => array('orderid' => $order->order_id)), 'setting');
+
+  $bpost_logo = theme('image', array('path' => 'https://www.bpost.be/site/fr/_images/logo_bpost.jpg', 'attributes' => array('id' => 'logobpost')));
+  $help = '<div><p>'. $bpost_logo . t('Before continuing, click on the bpost logo to configure your delivery address and options.') . '</p></div>';
+  
+  return $help;
+}
+
+/**
+ * Page callback; Handle the bpost feedback.
+ *
+ * This callback is invoked when closing the bpost popup, either when completing
+ * the data entry, or when cancelling the popup using the "return to shop"
+ * button.
+ */
+function commerce_bpost_bpost_feedback() {
+  if (isset($_POST['orderReference']) && ($order = commerce_order_load($_POST['orderReference']))) {
+    // Verify the checksum included in the bpost feedback.
+
+    // Temporarily disabled.
+    //if (commerce_bpost_checksum_verify($_POST)) {
+    if (TRUE) {
+      // Store the bpost feedback data in the order's data array.
+      $order->data['bpost'] = $_POST;
+
+      // Instead of relying on Commerce Shipping and the Shipping pane to store
+      // the selected shipping method and create the shipping line item, we do
+      // this ourselves. By taking care of this, it is possible to leave the
+      // shipping pane disabled for those users that only have bpost as a
+      // shipping backend.
+      commerce_bpost_add_shipping_line_item($order);
+    }
+    else {
+      drupal_set_message(t('Invalid or incomplete feedback received from bpost.'), 'error');
+    }
+  }
+
+  // Since this URL is loaded from within the bpost popup, we need to instruct
+  // the browser to close the popup.
+  print "<script>window.close();</script>";
+  drupal_exit();
+}
+
+/**
+ * Adds a bpost shipping line item to an order and saves the order.
+ *
+ * @param $order
+ *   The order for which to save the shipping line item.
+ */
+function commerce_bpost_add_shipping_line_item($order) {
+  // Remove older shipping line items.
+  commerce_shipping_delete_shipping_line_items($order, FALSE);
+
+  // Collect available shipping rates for an order and add them to the order
+  // object via an unsaved shipping_rates property.
+  commerce_shipping_collect_rates($order);
+
+  // Fetch the shipping rate line item for our bpost shipping service.
+  $delivery_method = $order->data['bpost']['deliveryMethod'];
+  $delivery_method = str_replace(' ', '_', strtolower($delivery_method));
+  $rate_line_item = $order->shipping_rates[$delivery_method];
+  $rate_line_item_wrapper = entity_metadata_wrapper('commerce_line_item', $rate_line_item);
+  $unit_price = $rate_line_item_wrapper->commerce_unit_price->value();
+
+  // Create a new shipping line item.
+  $line_item = commerce_shipping_line_item_new($delivery_method, $unit_price, $order->order_id, $rate_line_item->data, $rate_line_item->type);
+
+  // Save and add the shipping line item to the order.
+  commerce_shipping_add_shipping_line_item($line_item, $order, FALSE);
+}
+
+/**
+ * Access callback for the bpost form generation.
+ */
+function commerce_bpost_ajax_redirect_form_access($order) {
+  global $user;
+  return ($order->uid == $user->uid);
+}
