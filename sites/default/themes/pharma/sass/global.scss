@@ -268,3 +268,31 @@ ul.team-items {
   margin-right: 20px;
   margin-bottom: 20px;
 }
+
+/** Shopping Catalog **/
+ul.catalog-items {
+  margin: 0;
+  padding: 0;
+  li.catalog-item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    margin-right: 4%;
+    margin-bottom: 20px;
+    border: 1px solid #ededed;
+    width: 45%;
+    position: relative;
+    &.last {
+      margin-right: 0;
+    }
+    .catalog-item-image {
+      float: left;
+      clear: left;
+    }
+    .catalog-item-description {
+      margin-left: 120px;
+      padding-top: 10px;
+    }
+  }
+}

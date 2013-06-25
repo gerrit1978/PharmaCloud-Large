@@ -957,7 +957,7 @@ function lightbox2_field_formatter_view($entity_type, $entity, $field, $instance
   if ($lightbox_style == 'original') {
     $lightbox_style = NULL;
   }
-
+  $node_id = 0;
   if ($entity_type == 'node') {
     $node_id = $entity->nid;
   }

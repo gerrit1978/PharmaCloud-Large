@@ -308,3 +308,36 @@ ul.team-items li.team-item.last {
   margin-right: 20px;
   margin-bottom: 20px;
 }
+
+/** Shopping Catalog **/
+/* line 273, ../sass/global.scss */
+ul.catalog-items {
+  margin: 0;
+  padding: 0;
+}
+/* line 276, ../sass/global.scss */
+ul.catalog-items li.catalog-item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  float: left;
+  margin-right: 4%;
+  margin-bottom: 20px;
+  border: 1px solid #ededed;
+  width: 45%;
+  position: relative;
+}
+/* line 286, ../sass/global.scss */
+ul.catalog-items li.catalog-item.last {
+  margin-right: 0;
+}
+/* line 289, ../sass/global.scss */
+ul.catalog-items li.catalog-item .catalog-item-image {
+  float: left;
+  clear: left;
+}
+/* line 293, ../sass/global.scss */
+ul.catalog-items li.catalog-item .catalog-item-description {
+  margin-left: 120px;
+  padding-top: 10px;
+}
