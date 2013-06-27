@@ -14,6 +14,7 @@ class SearchApiRangesWidgetLinks extends FacetapiWidgetLinks {
    * Renders the links.
    */
   public function execute() {
+
     $element = &$this->build[$this->facet['field alias']];
 
     // Get Search API stuff
@@ -47,6 +48,7 @@ class SearchApiRangesWidgetLinks extends FacetapiWidgetLinks {
       '#items' => $this->buildListItems($element),
       '#attributes' => $this->build['#attributes'],
     );
+
   }
 
   /**

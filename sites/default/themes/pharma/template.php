@@ -10,3 +10,11 @@
  * for your subtheme grows. Please read the README.txt in the /preprocess and /process subfolders
  * for more information on this topic.
  */
+
+/**
+ * Removes the number of items from the facet.
+ * This is necessary for the "price range" facet
+ */
+function pharma_preprocess_facetapi_link_inactive(&$variables) {
+  unset($variables['count']);
+}
