@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  *   Checkout pane hooks

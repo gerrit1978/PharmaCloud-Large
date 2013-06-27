@@ -296,3 +296,8 @@ ul.catalog-items {
     }
   }
 }
+
+/** Kiala fix **/
+html.js .commerce-kiala-service-details-form .form-type-radio {
+  width: 100%;
+}

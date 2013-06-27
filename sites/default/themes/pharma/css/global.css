@@ -341,3 +341,9 @@ ul.catalog-items li.catalog-item .catalog-item-description {
   margin-left: 120px;
   padding-top: 10px;
 }
+
+/** Kiala fix **/
+/* line 301, ../sass/global.scss */
+html.js .commerce-kiala-service-details-form .form-type-radio {
+  width: 100%;
+}
