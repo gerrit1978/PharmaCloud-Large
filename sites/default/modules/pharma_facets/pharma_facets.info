@@ -1,0 +1,5 @@
+name        = Pharma Facets
+description = Alters search api facets output
+core        = 7.x
+version     = 7.x-1.0
+package     = Pharma

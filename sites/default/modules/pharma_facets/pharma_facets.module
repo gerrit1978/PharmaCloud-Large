@@ -1,0 +1,10 @@
+<?php
+function pharma_facets_facet_items_alter(&$build, &$settings) {
+  exit('functie aangeroepen');
+  if ($settings->facet == "YOUR_FACET_NAME") {
+    foreach($build as $key => $item) {
+      $build[$key]["#markup"] = drupal_strtoupper($item["#markup"]);
+    }
+  }
+}
+?>
