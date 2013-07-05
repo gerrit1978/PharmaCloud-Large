@@ -15,11 +15,11 @@
  * Removes the number of items from the facet.
  * This is necessary for the "price range" facet
  */
-function pharma_preprocess_facetapi_link_inactive(&$variables) {
+function apo_preprocess_facetapi_link_inactive(&$variables) {
   unset($variables['count']);
 }
 
-function pharma_commerce_cart_empty_page() {
+function apo_commerce_cart_empty_page() {
   return '<div class="cart-empty-page">' 
     . t('Your shopping cart is empty.')
     . '<br /><br />'

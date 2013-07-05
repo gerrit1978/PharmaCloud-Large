@@ -51,31 +51,6 @@ h2.site-name a:hover {
   color: #222222;
 }
 
-.webform-client-form input.form-submit {
-  border: none;
-  background: $mainColor;
-  color: $inverseColor;
-  border-bottom: 3px solid $mainColorDark;
-  font-size: 1.154em;
-  text-transform: uppercase;
-  padding: 0.35em 0.5em;
-  cursor: pointer;
-  -webkit-transition: all 0.1s ease-in-out;
-  -moz-transition: all 0.1s ease-in-out;
-  -o-transition: all 0.1s ease-in-out;
-  -ms-transition: all 0.1s ease-in-out;
-  transition: all 0.1s ease-in-out;
-  &:hover {
-    background: $mainColorDark;
-  }
-}
-
-.webform-client-form input.form-text, .webform-client-form input.form-textarea {
-  border: 1px solid $mainColorDark;
-  line-height: 25px;
-  width: 100%;
-}
-
 input.form-text {
   height: 25px;
 }
@@ -88,12 +63,19 @@ h2.block-title {
 
 .region-sidebar-second .block {
   margin-right: -28px;
+  margin-bottom: 20px;
   background: url(../img/bg_block_sidebar_right.png) no-repeat right top;
   color: $inverseColor;
   .block-inner {
     background: $mainColor;
     margin-right: 28px;
     padding: 1em;
+    a {
+      color: $inverseColor;
+      &:hover {
+        color: $inverseColorShadow;
+      }
+    }
   }
   h2.block-title {
     color: $inverseColor;
@@ -102,7 +84,7 @@ h2.block-title {
 }
 
 #zone-branding #region-branding {
-  margin: 20px 0;
+  padding: 40px 0 20px 0;
   width: 960px;
 }
 
@@ -123,7 +105,7 @@ h2.block-title {
 	  line-height: 55px;
 	  list-style: none;
 	  font-family: "BebasNeueRegular";
-	  font-size: 2em;
+	  font-size: 1.692em;
 	  text-shadow: 1px 1px 2px $inverseColorShadow;
 	  a {
 		  color: $inverseColor;
@@ -141,6 +123,49 @@ h2.block-title {
   font-size: 1.231em;
   line-height: 1.4;
 }
+
+/* Service Menu */
+#zone-branding .service-menu {
+  position: absolute;
+  top: 10px;
+  right: 0px;
+  ul.menu {
+	  margin: 0;
+	  padding: 0;
+	  li {
+	    list-style: none;
+	    margin: 0;
+	    padding: 0;
+	    float: left;
+	    margin-right: 20px;
+	  }
+  }
+}
+
+/** Search Block **/
+#block-search-form {
+  position: absolute;
+  top: 65px;
+  right: -20px;
+  input.form-text {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #888;
+    padding-bottom: 4px;
+    padding-right: 30px;
+  }
+  input.form-submit {
+	  background: url(../img/bg_search_btn.png) no-repeat center center;
+	  text-indent: -999em;
+	  border: none;
+	  width: 25px;
+	  height: 20px;
+	  cursor: pointer;
+	  position: relative;
+	  right: 30px;
+	}
+}
+
 
 /** Frontpage Promo block **/
 #zone-preface #region-preface {
@@ -186,29 +211,42 @@ ul.promo-items li.promo-item {
 
 }
 
-/** Search Block **/
-#block-search-form {
-  position: absolute;
-  top: 40px;
-  right: -26px;
-  input.form-text {
-    background: none;
-    border: none;
-    border-bottom: 1px solid #888;
-    padding-bottom: 4px;
-    padding-right: 30px;
-  }
-  input.form-submit {
-	  background: url(../img/bg_search_btn.png) no-repeat center center;
-	  text-indent: -999em;
-	  border: none;
-	  width: 25px;
-	  height: 20px;
-	  cursor: pointer;
-	  position: relative;
-	  right: 30px;
-	}
+/** Frontpage 3 blocks **/
+.front #region-postscript {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100%;
 }
+
+.front ul.front-blocks {
+  margin: 0;
+  padding: 0;
+  li.front-block {
+    padding-top: 20px;
+    .frontblock-image {
+      margin-bottom: 20px;
+      img {
+        width: 276px;
+        height: 120px;
+        border: 2px solid #f3f4f5;
+      }
+    }
+    .frontblock-title {
+      font-family: "BebasNeueRegular";
+      text-transform: uppercase;
+      font-size: 1.538em;
+      margin-bottom: 10px;
+    }
+    .frontblock-body {
+      font-size: 1.077em;
+      p {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+
 
 /** Footer **/
 #zone-footer {
@@ -267,6 +305,58 @@ ul.team-items {
   padding-top: 10px;
   margin-right: 20px;
   margin-bottom: 20px;
+}
+
+/** Webforms **/
+.webform-client-form {
+  clear: both;
+  padding-top: 20px;
+
+	.webform-component {
+	  clear: left;
+	  label {
+	    width: 30%;
+	    float: left;
+	    font-weight: 100;
+	  }
+	  .description {
+	    margin-left: 30%;
+	  }
+	  .form-textarea-wrapper textarea {
+	    width: 400px;
+	    padding: 2px 7px;
+	    border: 1px solid #cacaca;
+	    font-size: 1.308em;
+	    box-sizing: content-box;
+	    -moz-box-sizing: content-box;
+	  }
+	  .form-text {
+	    padding: 2px 7px;
+	    width: 400px;
+	    border: 1px solid #cacaca;
+	    height: 25px;
+	    line-height: 25px;
+	    font-size: 1.308em;    
+	  }
+	}
+  .form-actions input.form-submit {
+	  border: none;
+	  background: $mainColor;
+	  color: $inverseColor;
+	  border-bottom: 3px solid $mainColorDark;
+	  font-size: 1.154em;
+	  text-transform: uppercase;
+	  padding: 0.35em 0.5em;
+	  cursor: pointer;
+	  -webkit-transition: all 0.1s ease-in-out;
+	  -moz-transition: all 0.1s ease-in-out;
+	  -o-transition: all 0.1s ease-in-out;
+	  -ms-transition: all 0.1s ease-in-out;
+	  transition: all 0.1s ease-in-out;
+	  &:hover {
+	    background: $mainColorDark;
+	  }
+  }
 }
 
 /** Shopping Catalog **/

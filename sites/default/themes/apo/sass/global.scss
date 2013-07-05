@@ -1,0 +1,386 @@
+@import "base";
+
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+
+body {
+  font-family: "PT Sans", Arial, sans-serif;
+  color: $mainColorDark;
+  font-weight: 100;
+  background: $pageBgColor;  
+}
+
+.zone {
+  background: $zoneBgColor;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Condensed";
+  text-transform: uppercase;
+}
+
+a:link, a:visited {
+  color: $linkColor;
+  text-decoration: none;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+a:hover {
+  color: $linkColorHover;
+}
+
+li {
+  list-style-position: inside;
+}
+
+#block-system-main {
+  font-size: 1.308em;
+}
+
+/* Service Menu */
+#zone-branding .service-menu {
+  position: absolute;
+  top: 25px;
+  right: -10px;
+  ul.menu {
+	  margin: 0;
+	  padding: 0;
+	  li {
+	    list-style: none;
+	    margin: 0;
+	    padding: 0;
+	    float: left;
+	    margin-right: 20px;
+	  }
+  }
+}
+
+/** Sticky Footer **/
+html, body {
+  height: 100%;
+}
+
+#page {
+  min-height: 100%;
+  position: relative;
+}
+
+#section-content {
+  padding-bottom: 100px;
+}
+
+#section-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  background: $mainColorDark;
+  color: #727272;
+  a:link, a:visited {
+    color: #727272;
+  }
+  a:hover {
+    color: white;
+  }
+}
+
+#section-footer p {
+  margin-bottom: 0;
+}
+
+#zone-footer {
+  background: $mainColorDark;
+}
+
+/** Site slogan **/
+.site-name-slogan {
+  padding: 0;
+}
+
+
+/** Main Menu **/
+#zone-menu {
+	ul.menu {
+	  margin: 0;
+	  padding: 0;
+	  li {
+	    list-style: none;
+	    float: left;
+	    margin: 0;
+	    padding: 0;
+	    margin-right: 40px;
+	    font-size: 1.231em;
+	    a {
+	      padding-bottom: 6px;
+		    &.active {
+          border-bottom: 3px solid $inverseColorActive;
+		    }
+	    }
+	  }
+	}
+	#region-menu {
+	  padding: 40px 0;
+	}
+}
+
+
+/** Frontpage Promo block **/
+.block-promo-homepage-block {
+  margin-bottom: 20px;
+  height: 320px;
+  overflow: hidden;
+}
+
+ul.promo-items {
+  margin: 0;
+  padding: 0;
+	li.promo-item {
+		margin: 0;
+		padding: 0;
+		position: relative;
+		height: 320px;
+		width: 1160px;
+		.promo-description {
+		  position: absolute;
+		  top: 20px;
+		  left: 0;
+		  padding: 1.8em;
+		  background: url(../img/bg_promo_description.png) repeat;
+		  width: 33%;
+		  z-index: 100;
+		  font-size: 1.231em;
+			h1 {
+			  text-shadow: 1px 1px 2px white;
+			}		
+		}
+		.promo-visual {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  z-index: 10;
+		}		
+	}
+}
+
+/** Frontpage text block **/
+.front #region-content {
+  margin: 0;
+  width: 100%;
+}
+
+.front #block-system-main {
+  background: #f3f4f5;
+  border-top: 1px solid $mainColor;
+  border-bottom: 1px solid $mainColor;
+  padding: 40px;
+}
+
+/** Frontpage 3 blocks **/
+.front ul.front-blocks {
+  margin: 0;
+  padding: 0;
+  li.front-block {
+    margin: 0;
+    padding: 0;
+    margin-right: 40px;
+    padding: 20px 0;
+    &.last {
+      margin-right: 0;
+    }
+    .frontblock-image {
+      margin-bottom: 10px;
+      img {
+        width: 356px;
+        height: 155px;
+        border: 2px solid #f3f4f5;
+      }
+    }
+    .frontblock-title {
+      font-family: "Roboto Condensed";
+      text-transform: uppercase;
+      font-size: 1.538em;
+      margin-bottom: 10px;
+    }
+    .frontblock-body {
+      font-size: 1.231em;
+      p {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+/*
+.front ul.frontblocks li.frontblock .frontblock-image {
+  display: none;
+}
+*/
+
+/** Search Block **/
+#block-search-form {
+  position: absolute;
+  z-index: 200;
+  top: 100px;
+  right: 0;
+  input.form-text {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #888;
+    padding-bottom: 4px;
+    padding-right: 30px;
+    width: 250px;
+  }
+  .form-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+	  input.form-submit {
+		  background: url(../img/bg_search_btn.png) no-repeat center center;
+		  text-indent: -999em;
+		  border: none;
+		  width: 25px;
+		  height: 20px;
+		  cursor: pointer;
+		}
+  }
+}
+
+/** Sidebar Blocks **/
+.region-sidebar-second .block {
+  margin-bottom: 20px;
+  h2.block-title {
+    font-size: 2em;
+  }
+  .content {
+    font-size: 1.231em;
+  }
+}
+
+/** Teamleden **/
+ul.team-items {
+  margin: 0;
+  padding: 0;
+  li.team-item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    margin-right: 10%;
+    margin-bottom: 30px;
+    width: 45%;
+    .team-pasfoto {
+      clear: left;
+      float: left;
+      width: 140px;
+      img {
+        border: 2px solid #cacaca;
+      }
+    }
+    .team-description {
+      margin-left: 140px;
+      .team-naam {
+        font-weight: 800;
+      }
+    }
+  }
+  li.team-item.last {
+    margin-right: 0;
+  }
+}
+
+
+/** Webforms **/
+.webform-client-form {
+  clear: both;
+  padding-top: 20px;
+
+	.webform-component {
+	  clear: left;
+	  label {
+	    width: 30%;
+	    float: left;
+	    font-weight: 100;
+	  }
+	  .description {
+	    margin-left: 30%;
+	  }
+	  .form-textarea-wrapper textarea {
+	    width: 500px;
+	    padding: 2px 7px;
+	    border: 1px solid $mainColor;
+	    font-size: 1.308em;
+	    box-sizing: content-box;
+	    -moz-box-sizing: content-box;
+	  }
+	  .form-text {
+	    padding: 2px 7px;
+	    width: 500px;
+	    border: 1px solid $mainColor;
+	    height: 25px;
+	    line-height: 25px;
+	    font-size: 1.308em;    
+	  }
+	}
+  .form-actions input.form-submit {
+	  border: none;
+	  background: $mainColor;
+	  color: $inverseColor;
+	  border-bottom: 3px solid $mainColorDark;
+	  font-size: 1.154em;
+	  text-transform: uppercase;
+	  padding: 0.35em 0.5em;
+	  cursor: pointer;
+	  -webkit-transition: all 0.1s ease-in-out;
+	  -moz-transition: all 0.1s ease-in-out;
+	  -o-transition: all 0.1s ease-in-out;
+	  -ms-transition: all 0.1s ease-in-out;
+	  transition: all 0.1s ease-in-out;
+	  &:hover {
+	    background: $mainColorDark;
+	  }
+  }
+}
+
+
+/** Footer **/
+.block-copyright-footer {
+  text-align: center;
+}
+
+/** Shopping Catalog **/
+ul.catalog-items {
+  margin: 0;
+  padding: 0;
+  li.catalog-item {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+    margin-right: 4%;
+    margin-bottom: 20px;
+    border: 1px solid #ededed;
+    width: 45%;
+    position: relative;
+    &.last {
+      margin-right: 0;
+    }
+    .catalog-item-image {
+      float: left;
+      clear: left;
+    }
+    .catalog-item-description {
+      margin-left: 120px;
+      padding-top: 10px;
+    }
+  }
+}
+
+/** Kiala fix **/
+html.js .commerce-kiala-service-details-form .form-type-radio {
+  width: 100%;
+}

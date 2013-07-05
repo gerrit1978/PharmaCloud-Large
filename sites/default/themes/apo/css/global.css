@@ -1,0 +1,444 @@
+/* This file will hold styles for the mobile version of your website (mobile first). */
+/* This also can include ANY global CSS that applies site-wide. Unless overwritten by a more specific style rule, CSS declarations in global.css will apply site-wide. */
+/* line 6, ../sass/global.scss */
+body {
+  font-family: "PT Sans", Arial, sans-serif;
+  color: #444444;
+  font-weight: 100;
+  background: #efefef;
+}
+
+/* line 13, ../sass/global.scss */
+.zone {
+  background: white;
+}
+
+/* line 17, ../sass/global.scss */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Condensed";
+  text-transform: uppercase;
+}
+
+/* line 22, ../sass/global.scss */
+a:link, a:visited {
+  color: #999999;
+  text-decoration: none;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+
+/* line 32, ../sass/global.scss */
+a:hover {
+  color: #111111;
+}
+
+/* line 36, ../sass/global.scss */
+li {
+  list-style-position: inside;
+}
+
+/* line 40, ../sass/global.scss */
+#block-system-main {
+  font-size: 1.308em;
+}
+
+/* Service Menu */
+/* line 45, ../sass/global.scss */
+#zone-branding .service-menu {
+  position: absolute;
+  top: 25px;
+  right: -10px;
+}
+/* line 49, ../sass/global.scss */
+#zone-branding .service-menu ul.menu {
+  margin: 0;
+  padding: 0;
+}
+/* line 52, ../sass/global.scss */
+#zone-branding .service-menu ul.menu li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  float: left;
+  margin-right: 20px;
+}
+
+/** Sticky Footer **/
+/* line 63, ../sass/global.scss */
+html, body {
+  height: 100%;
+}
+
+/* line 67, ../sass/global.scss */
+#page {
+  min-height: 100%;
+  position: relative;
+}
+
+/* line 72, ../sass/global.scss */
+#section-content {
+  padding-bottom: 100px;
+}
+
+/* line 76, ../sass/global.scss */
+#section-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  background: #444444;
+  color: #727272;
+}
+/* line 84, ../sass/global.scss */
+#section-footer a:link, #section-footer a:visited {
+  color: #727272;
+}
+/* line 87, ../sass/global.scss */
+#section-footer a:hover {
+  color: white;
+}
+
+/* line 92, ../sass/global.scss */
+#section-footer p {
+  margin-bottom: 0;
+}
+
+/* line 96, ../sass/global.scss */
+#zone-footer {
+  background: #444444;
+}
+
+/** Site slogan **/
+/* line 101, ../sass/global.scss */
+.site-name-slogan {
+  padding: 0;
+}
+
+/** Main Menu **/
+/* line 108, ../sass/global.scss */
+#zone-menu ul.menu {
+  margin: 0;
+  padding: 0;
+}
+/* line 111, ../sass/global.scss */
+#zone-menu ul.menu li {
+  list-style: none;
+  float: left;
+  margin: 0;
+  padding: 0;
+  margin-right: 40px;
+  font-size: 1.231em;
+}
+/* line 118, ../sass/global.scss */
+#zone-menu ul.menu li a {
+  padding-bottom: 6px;
+}
+/* line 120, ../sass/global.scss */
+#zone-menu ul.menu li a.active {
+  border-bottom: 3px solid black;
+}
+/* line 126, ../sass/global.scss */
+#zone-menu #region-menu {
+  padding: 40px 0;
+}
+
+/** Frontpage Promo block **/
+/* line 133, ../sass/global.scss */
+.block-promo-homepage-block {
+  margin-bottom: 20px;
+  height: 320px;
+  overflow: hidden;
+}
+
+/* line 139, ../sass/global.scss */
+ul.promo-items {
+  margin: 0;
+  padding: 0;
+}
+/* line 142, ../sass/global.scss */
+ul.promo-items li.promo-item {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 320px;
+  width: 1160px;
+}
+/* line 148, ../sass/global.scss */
+ul.promo-items li.promo-item .promo-description {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  padding: 1.8em;
+  background: url(../img/bg_promo_description.png) repeat;
+  width: 33%;
+  z-index: 100;
+  font-size: 1.231em;
+}
+/* line 157, ../sass/global.scss */
+ul.promo-items li.promo-item .promo-description h1 {
+  text-shadow: 1px 1px 2px white;
+}
+/* line 161, ../sass/global.scss */
+ul.promo-items li.promo-item .promo-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+/** Frontpage text block **/
+/* line 171, ../sass/global.scss */
+.front #region-content {
+  margin: 0;
+  width: 100%;
+}
+
+/* line 176, ../sass/global.scss */
+.front #block-system-main {
+  background: #f3f4f5;
+  border-top: 1px solid #cacaca;
+  border-bottom: 1px solid #cacaca;
+  padding: 40px;
+}
+
+/** Frontpage 3 blocks **/
+/* line 184, ../sass/global.scss */
+.front ul.front-blocks {
+  margin: 0;
+  padding: 0;
+}
+/* line 187, ../sass/global.scss */
+.front ul.front-blocks li.front-block {
+  margin: 0;
+  padding: 0;
+  margin-right: 40px;
+  padding: 20px 0;
+}
+/* line 192, ../sass/global.scss */
+.front ul.front-blocks li.front-block.last {
+  margin-right: 0;
+}
+/* line 195, ../sass/global.scss */
+.front ul.front-blocks li.front-block .frontblock-image {
+  margin-bottom: 10px;
+}
+/* line 197, ../sass/global.scss */
+.front ul.front-blocks li.front-block .frontblock-image img {
+  width: 356px;
+  height: 155px;
+  border: 2px solid #f3f4f5;
+}
+/* line 203, ../sass/global.scss */
+.front ul.front-blocks li.front-block .frontblock-title {
+  font-family: "Roboto Condensed";
+  text-transform: uppercase;
+  font-size: 1.538em;
+  margin-bottom: 10px;
+}
+/* line 209, ../sass/global.scss */
+.front ul.front-blocks li.front-block .frontblock-body {
+  font-size: 1.231em;
+}
+/* line 211, ../sass/global.scss */
+.front ul.front-blocks li.front-block .frontblock-body p {
+  margin-bottom: 8px;
+}
+
+/*
+.front ul.frontblocks li.frontblock .frontblock-image {
+  display: none;
+}
+*/
+/** Search Block **/
+/* line 225, ../sass/global.scss */
+#block-search-form {
+  position: absolute;
+  z-index: 200;
+  top: 100px;
+  right: 0;
+}
+/* line 230, ../sass/global.scss */
+#block-search-form input.form-text {
+  background: none;
+  border: none;
+  border-bottom: 1px solid #888;
+  padding-bottom: 4px;
+  padding-right: 30px;
+  width: 250px;
+}
+/* line 238, ../sass/global.scss */
+#block-search-form .form-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* line 242, ../sass/global.scss */
+#block-search-form .form-actions input.form-submit {
+  background: url(../img/bg_search_btn.png) no-repeat center center;
+  text-indent: -999em;
+  border: none;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/** Sidebar Blocks **/
+/* line 254, ../sass/global.scss */
+.region-sidebar-second .block {
+  margin-bottom: 20px;
+}
+/* line 256, ../sass/global.scss */
+.region-sidebar-second .block h2.block-title {
+  font-size: 2em;
+}
+/* line 259, ../sass/global.scss */
+.region-sidebar-second .block .content {
+  font-size: 1.231em;
+}
+
+/** Teamleden **/
+/* line 265, ../sass/global.scss */
+ul.team-items {
+  margin: 0;
+  padding: 0;
+}
+/* line 268, ../sass/global.scss */
+ul.team-items li.team-item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  float: left;
+  margin-right: 10%;
+  margin-bottom: 30px;
+  width: 45%;
+}
+/* line 276, ../sass/global.scss */
+ul.team-items li.team-item .team-pasfoto {
+  clear: left;
+  float: left;
+  width: 140px;
+}
+/* line 280, ../sass/global.scss */
+ul.team-items li.team-item .team-pasfoto img {
+  border: 2px solid #cacaca;
+}
+/* line 284, ../sass/global.scss */
+ul.team-items li.team-item .team-description {
+  margin-left: 140px;
+}
+/* line 286, ../sass/global.scss */
+ul.team-items li.team-item .team-description .team-naam {
+  font-weight: 800;
+}
+/* line 291, ../sass/global.scss */
+ul.team-items li.team-item.last {
+  margin-right: 0;
+}
+
+/** Webforms **/
+/* line 298, ../sass/global.scss */
+.webform-client-form {
+  clear: both;
+  padding-top: 20px;
+}
+/* line 302, ../sass/global.scss */
+.webform-client-form .webform-component {
+  clear: left;
+}
+/* line 304, ../sass/global.scss */
+.webform-client-form .webform-component label {
+  width: 30%;
+  float: left;
+  font-weight: 100;
+}
+/* line 309, ../sass/global.scss */
+.webform-client-form .webform-component .description {
+  margin-left: 30%;
+}
+/* line 312, ../sass/global.scss */
+.webform-client-form .webform-component .form-textarea-wrapper textarea {
+  width: 500px;
+  padding: 2px 7px;
+  border: 1px solid #cacaca;
+  font-size: 1.308em;
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+}
+/* line 320, ../sass/global.scss */
+.webform-client-form .webform-component .form-text {
+  padding: 2px 7px;
+  width: 500px;
+  border: 1px solid #cacaca;
+  height: 25px;
+  line-height: 25px;
+  font-size: 1.308em;
+}
+/* line 329, ../sass/global.scss */
+.webform-client-form .form-actions input.form-submit {
+  border: none;
+  background: #cacaca;
+  color: white;
+  border-bottom: 3px solid #444444;
+  font-size: 1.154em;
+  text-transform: uppercase;
+  padding: 0.35em 0.5em;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+/* line 343, ../sass/global.scss */
+.webform-client-form .form-actions input.form-submit:hover {
+  background: #444444;
+}
+
+/** Footer **/
+/* line 351, ../sass/global.scss */
+.block-copyright-footer {
+  text-align: center;
+}
+
+/** Shopping Catalog **/
+/* line 356, ../sass/global.scss */
+ul.catalog-items {
+  margin: 0;
+  padding: 0;
+}
+/* line 359, ../sass/global.scss */
+ul.catalog-items li.catalog-item {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  float: left;
+  margin-right: 4%;
+  margin-bottom: 20px;
+  border: 1px solid #ededed;
+  width: 45%;
+  position: relative;
+}
+/* line 369, ../sass/global.scss */
+ul.catalog-items li.catalog-item.last {
+  margin-right: 0;
+}
+/* line 372, ../sass/global.scss */
+ul.catalog-items li.catalog-item .catalog-item-image {
+  float: left;
+  clear: left;
+}
+/* line 376, ../sass/global.scss */
+ul.catalog-items li.catalog-item .catalog-item-description {
+  margin-left: 120px;
+  padding-top: 10px;
+}
+
+/** Kiala fix **/
+/* line 384, ../sass/global.scss */
+html.js .commerce-kiala-service-details-form .form-type-radio {
+  width: 100%;
+}

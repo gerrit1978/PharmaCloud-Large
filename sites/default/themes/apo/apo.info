@@ -1,4 +1,4 @@
-name = 'Pharma'
+name = 'Apo'
 description = ''
 core = '7.x'
 engine = 'phptemplate'
@@ -352,5 +352,17 @@ settings[alpha_region_footer_second_weight] = '2'
 settings[alpha_region_footer_second_css] = ''
 version = '1.x'
 
+
+; Adjustments for Apo theme
 scripts[] = scripts/jquery.carouFredSel-6.2.1-packed.js
 scripts[] = scripts/scripts.js
+
+; CSS GRID SYSTEMS
+
+grids[apo_default][name] = Apo Default (1140px)
+grids[apo_default][layouts][wide] = Wide
+grids[apo_default][columns][12] = 12 Columns
+
+stylesheets[all and (max-width: 1008px)][] = css/apo-apo-default-wide.css
+stylesheets[all][] = css/apo-apo-default.css
+stylesheets[all and (min-width: 1008px)][] = css/grid/apo_default/wide/apo-default-wide-12.css
