@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * GMap marker information routines.
@@ -22,7 +23,6 @@ function _gmap_get_icondata() {
   );
 
   $markerdirs = variable_get('gmap_markerfiles', array(drupal_get_path('module', 'gmap') . '/markers'));
-  
   $markercustomdir = variable_get('gmap_marker_custom_dir', NULL);
   if ($markercustomdir) {
     $markerdirs[] = $markercustomdir;
